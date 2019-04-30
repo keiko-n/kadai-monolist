@@ -4,7 +4,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @items = @user.items.uniq
+    @items = Item.order('updated_at DESC')
     @count_want = @user.want_items.count
+    @count_have = @user.have_items.count
   end
 
   def new
