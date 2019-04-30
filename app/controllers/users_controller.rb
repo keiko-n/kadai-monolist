@@ -3,8 +3,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @items = @user.items.uniq
-    @items = Item.order('updated_at DESC')
+    @items = @user.items.order('updated_at DESC').uniq
     @count_want = @user.want_items.count
     @count_have = @user.have_items.count
   end
@@ -21,7 +20,7 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       flash.now[:dangar] = 'ユーザの登録に失敗しました'
-      render new
+      render :new
     end
   end
   
